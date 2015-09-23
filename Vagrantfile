@@ -15,10 +15,12 @@ Vagrant.configure(2) do |config|
   end
 
   config.vm.provision :shell, :inline => <<-END
-    apt-get install -qq -y software-properties-common
-    add-apt-repository ppa:duggan/bats --yes
-    apt-get update -qq
-    apt-get install -qq -y bats
+    command -v bats >/dev/null 2>&1 || {
+      apt-get install -qq -y software-properties-common
+      add-apt-repository ppa:duggan/bats --yes
+      apt-get update -qq
+      apt-get install -qq -y bats
+    }
     /vagrant/tests/check.bats
   END
 end

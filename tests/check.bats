@@ -12,6 +12,10 @@
   [ "$(netstat -plant | grep beam)" ]
 }
 
+@test "rabbitmq should be listening for connections" {
+  [ "$(netstat -an |grep 0.0.0.0:5672)" ]
+}
+
 @test "should have an erlang cookie" {
   [ -e "/var/lib/rabbitmq/.erlang.cookie" ]
 }

@@ -11,12 +11,25 @@
   become_method: sudo
   notify: restart rabbitmq
 
+- name: rabbitmq | configure erlang cookie | check
+  copy:
+    dest: "/var/lib/rabbitmq/.erlang.cookie.copy"
+    content: "{{ rabbitmq_erlang_cookie }}"
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0400
+    backup: yes
+  become: yes
+  become_method: sudo
+  register: cookie
+
 - name: rabbitmq | stop service
   service:
     name: rabbitmq-server
     state: stopped
   become: yes
   become_method: sudo
+  when: cookie is defined and cookie|changed
 
 - name: rabbitmq | configure erlang cookie
   copy:
