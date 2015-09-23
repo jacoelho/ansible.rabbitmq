@@ -21,6 +21,8 @@ rabbitmq_soft_limit: 4096
 
 rabbitmq_erlang_cookie: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters') }}"
 
+rabbitmq_env: {  }
+
 rabbitmq_config_high_watermark: "0.1"
 rabbitmq_config_tcp_listeners: "[{\"0.0.0.0\", 5672}]"
 rabbitmq_config_cluster_partition_handling: "pause_minority"
