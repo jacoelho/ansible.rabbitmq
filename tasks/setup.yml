@@ -42,3 +42,5 @@
   become: yes
   become_method: sudo
   notify: restart rabbitmq
+
+- meta: flush_handlers
