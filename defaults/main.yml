@@ -1,0 +1,27 @@
+---
+
+rabbitmq_repository: "deb http://www.rabbitmq.com/debian testing main"
+rabbitmq_repository_key: "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
+
+rabbitmq_plugins:
+  - rabbitmq_management
+
+rabbitmq_disable_users:
+  - guest
+
+rabbitmq_users:
+  - user: admin
+    password: admin
+    vhost: /
+    configure_priv: .*
+    read_priv: .*
+    write_priv: .*
+    tags: administrator
+
+rabbitmq_soft_limit: 4096
+
+rabbitmq_erlang_cookie: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters') }}"
+
+rabbitmq_config_high_watermark: "0.1"
+rabbitmq_config_tcp_listeners: "[5672]"
+rabbitmq_config_cluster_partition_handling: "pause_minority"

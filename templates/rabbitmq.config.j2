@@ -1,0 +1,15 @@
+%% -*- mode: erlang -*-
+%% This file is managed by Ansible, all changes will be lost.
+%%
+[
+  {rabbit, [
+    {vm_memory_high_watermark, {{ rabbitmq_config_high_watermark }}},
+    {tcp_listeners, {{ rabbitmq_config_tcp_listeners }}},
+    {cluster_partition_handling, {{ rabbitmq_config_cluster_partition_handling }}}
+  ]},
+  {kernel, [
+    {inet_default_listen_options, [{nodelay,true}]},
+    {inet_default_connect_options, [{nodelay,true}]}
+  ]}
+].
+% EOF

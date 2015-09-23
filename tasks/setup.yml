@@ -1,0 +1,44 @@
+---
+
+- name: rabbitmq | configure ulimit
+  template:
+    src: "rabbitmq-server.j2"
+    dest: "/etc/default/rabbitmq-server"
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  become_method: sudo
+  notify: restart rabbitmq
+
+- name: rabbitmq | configure erlang cookie
+  copy:
+    dest: "/var/lib/rabbitmq/.erlang.cookie"
+    content: "{{ rabbitmq_erlang_cookie }}"
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0400
+    backup: yes
+  become: yes
+  become_method: sudo
+  notify: restart rabbitmq
+
+- name: rabbitmq | config file
+  template:
+    src: "rabbitmq.config.j2"
+    dest: "/etc/rabbitmq/rabbitmq.config"
+    owner: root
+    group: root
+    mode: 0644
+  become: yes
+  become_method: sudo
+  notify: restart rabbitmq
+
+- name: rabbitmq | enable plugins
+  rabbitmq_plugin:
+    names: "{{ item }}"
+    state: enabled
+  with_items: rabbitmq_plugins
+  become: yes
+  become_method: sudo
+  notify: restart rabbitmq

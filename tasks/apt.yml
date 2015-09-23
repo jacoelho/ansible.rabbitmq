@@ -1,0 +1,25 @@
+---
+
+- name: rabbitmq | add repository key
+  apt_key:
+    url: "{{ rabbitmq_repository_key }}"
+    state: present
+  become: yes
+  become_method: sudo
+
+- name: rabbitmq | add repository
+  apt_repository:
+    repo: "{{ rabbitmq_repository }}"
+    state: present
+    update_cache: yes
+  become: yes
+  become_method: sudo
+
+- name: rabbitmq | install
+  apt:
+    pkg: rabbitmq-server
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  become: yes
+  become_method: sudo
