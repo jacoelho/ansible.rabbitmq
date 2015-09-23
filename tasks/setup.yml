@@ -11,6 +11,13 @@
   become_method: sudo
   notify: restart rabbitmq
 
+- name: rabbitmq | stop service
+  service:
+    name: rabbitmq-server
+    state: stopped
+  become: yes
+  become_method: sudo
+
 - name: rabbitmq | configure erlang cookie
   copy:
     dest: "/var/lib/rabbitmq/.erlang.cookie"
@@ -22,6 +29,8 @@
   become: yes
   become_method: sudo
   notify: restart rabbitmq
+
+- meta: flush_handlers
 
 - name: rabbitmq | config file
   template:
@@ -42,5 +51,3 @@
   become: yes
   become_method: sudo
   notify: restart rabbitmq
-
-- meta: flush_handlers
