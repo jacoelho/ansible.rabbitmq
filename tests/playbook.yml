@@ -9,5 +9,9 @@
     rabbitmq_plugins:
       - rabbitmq_clusterer
 
+    rabbitmq_env:
+      RABBITMQ_BOOT_MODULE: rabbit_clusterer
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-pa {{ rabbitmq_plugin_directory }}/rabbitmq_clusterer-3.5.x-189b3a81.ez/rabbitmq_clusterer-3.5.x-189b3a81/ebin"
+
   roles:
     - role: ansible.rabbitmq
