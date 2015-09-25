@@ -56,17 +56,6 @@
   become_method: sudo
   notify: restart rabbitmq
 
-- name: rabbitmq | env file
-  template:
-    src: "rabbitmq-env.conf.j2"
-    dest: "/etc/rabbitmq/rabbitmq-env.conf"
-    owner: root
-    group: root
-    mode: 0644
-  become: yes
-  become_method: sudo
-  notify: restart rabbitmq
-
 - name: rabbitmq | download plugins
   get_url:
     url: "{{ item }}"
@@ -83,6 +72,17 @@
     names: "{{ item }}"
     state: enabled
   with_items: rabbitmq_plugins
+  become: yes
+  become_method: sudo
+  notify: restart rabbitmq
+
+- name: rabbitmq | env file
+  template:
+    src: "rabbitmq-env.conf.j2"
+    dest: "/etc/rabbitmq/rabbitmq-env.conf"
+    owner: root
+    group: root
+    mode: 0644
   become: yes
   become_method: sudo
   notify: restart rabbitmq
