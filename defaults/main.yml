@@ -5,6 +5,8 @@ rabbitmq_repository_key: "http://www.rabbitmq.com/rabbitmq-signing-key-public.as
 
 rabbitmq_version: "3.5.4-1"
 
+rabbitmq_plugin_directory: "/usr/lib/rabbitmq/lib/rabbitmq_server-{{ rabbitmq_version.split('-') | first }}"
+
 # url to plugins
 rabbitmq_download_plugins: []
 
