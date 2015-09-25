@@ -2,6 +2,9 @@
 %% This file is managed by Ansible, all changes will be lost.
 %%
 [
+  {rabbitmq_clusterer,
+    [{config, "/etc/rabbitmq/cluster.config"}]
+  },
   {rabbit, [
     {vm_memory_high_watermark, {{ rabbitmq_config_high_watermark }}},
     {tcp_listeners, {{ rabbitmq_config_tcp_listeners }}},

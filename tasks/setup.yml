@@ -67,6 +67,17 @@
   become_method: sudo
   notify: restart rabbitmq
 
+- name: rabbitmq | download plugins
+  get_url:
+    url: "{{ item }}"
+    dest: "/usr/lib/rabbitmq/lib/rabbitmq_server-{{ rabbitmq_version.split('-') | first }}/plugins//{{ item | basename }}"
+    owner: rabbitmq
+    group: rabbitmq
+    mode: 0644
+  with_items: rabbitmq_download_plugins
+  become: yes
+  become_method: sudo
+
 - name: rabbitmq | enable plugins
   rabbitmq_plugin:
     names: "{{ item }}"

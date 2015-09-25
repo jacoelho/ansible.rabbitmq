@@ -3,6 +3,11 @@
 rabbitmq_repository: "deb http://www.rabbitmq.com/debian testing main"
 rabbitmq_repository_key: "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
 
+rabbitmq_version: "3.5.4-1"
+
+# url to plugins
+rabbitmq_download_plugins: []
+
 rabbitmq_plugins:
   - rabbitmq_management
 

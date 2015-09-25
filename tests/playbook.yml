@@ -3,5 +3,11 @@
 - name: testing
   hosts: all
 
+  vars:
+    rabbitmq_download_plugins:
+      - https://www.rabbitmq.com/community-plugins/v3.5.x/rabbitmq_clusterer-3.5.x-189b3a81.ez
+    rabbitmq_plugins:
+      - rabbitmq_clusterer
+
   roles:
     - role: ansible.rabbitmq
