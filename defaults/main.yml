@@ -3,9 +3,9 @@
 rabbitmq_repository: "deb http://www.rabbitmq.com/debian testing main"
 rabbitmq_repository_key: "http://www.rabbitmq.com/rabbitmq-signing-key-public.asc"
 
-rabbitmq_version: "3.5.4-1"
+rabbitmq_version: "3.5.5-3"
 
-rabbitmq_plugin_directory: "/usr/lib/rabbitmq/lib/rabbitmq_server-{{ rabbitmq_version.split('-') | first }}"
+rabbitmq_plugin_directory: "/usr/lib/rabbitmq/lib/rabbitmq_server-{{ rabbitmq_version.split('-') | first }}/plugins/"
 
 # url to plugins
 rabbitmq_download_plugins: []

@@ -70,7 +70,7 @@
 - name: rabbitmq | download plugins
   get_url:
     url: "{{ item }}"
-    dest: "{{ rabbitmq_plugin_directory }}/plugins//{{ item | basename }}"
+    dest: "{{ rabbitmq_plugin_directory }}/{{ item | basename }}"
     owner: rabbitmq
     group: rabbitmq
     mode: 0644
